@@ -13,7 +13,6 @@ def apply_spectral_clustering(city_list, n_clusters):
 
     for city, label in zip(city_list, labels):
         city.cluster_class = label
-
     return city_list
 
 if __name__ == '__main__':
@@ -22,8 +21,8 @@ if __name__ == '__main__':
     from Social_segregation.visual import plot_city_data_combined, plot_city_data_by_cluster,plot_selected_cities
     file_path = r"D:\Code\Social_segregation\data\SSI_golbal_data.csv"
     city_list = data_reader(file_path, 3)
-    # city_list = apply_spectral_clustering(city_list, 3)
+    city_list = apply_spectral_clustering(city_list, 3)
     # #plot_city_data_combined(city_list)
-    # plot_city_data_by_cluster(city_list)
+    plot_city_data_by_cluster(city_list)
     # save_results_to_csv(city_list, r"D:\Code\Social_segregation\data\SSI_golbal_data_spectral_result.csv")
-    plot_selected_cities(city_list,['Riverside','NewYork'])
+    #plot_selected_cities(city_list,['Riverside','NewYork'])

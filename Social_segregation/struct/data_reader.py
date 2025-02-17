@@ -50,5 +50,10 @@ def save_results_to_csv(city_list, output_file):
 if __name__ == '__main__':
     file_path = r"../data/SSI_golbal_data.csv"
     city_list = data_reader(file_path,3)
-    #plot_city_data(city_list)
-    #plot_city_data_by_class(city_list)
+    from Social_segregation.analysis.importance_analysis.RIA_analysis import relative_importance_analysis,relative_importance_analysis_with_selected_initclass
+    relative_importance_analysis_with_selected_initclass(city_list,0)
+    relative_importance_analysis_with_selected_initclass(city_list,1)
+    relative_importance_analysis_with_selected_initclass(city_list,2)
+
+    #relative_importance_analysis(city_list)
+
