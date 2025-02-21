@@ -29,7 +29,7 @@ def apply_spectral_clustering(city_list, n_clusters):
     使用谱聚类进行聚类，并分析变量贡献度
     """
     data = np.array([[city.theme1, city.theme2, city.theme3, city.theme4] for city in city_list])
-    city_names = [city.name for city in city_list]
+    city_names = [city.id for city in city_list]
     # 计算 n_neighbors，避免超出样本数
     n_neighbors = min(len(city_list) - 1, 3)
     spectral = SpectralClustering(n_clusters=n_clusters, random_state=0, affinity='nearest_neighbors',
@@ -42,7 +42,7 @@ def apply_spectral_clustering(city_list, n_clusters):
 
     # 转换为 DataFrame 进行分析
     df = pd.DataFrame({
-        "City": [city.name for city in city_list],
+        "City": [city.id for city in city_list],
         "Cluster": [city.cluster_class for city in city_list],
         "Theme 1": [city.theme1 for city in city_list],
         "Theme 2": [city.theme2 for city in city_list],
@@ -60,6 +60,7 @@ def apply_spectral_clustering(city_list, n_clusters):
 
     importance_df = pd.DataFrame(variable_importance).T
     importance_df.sort_values(by="ANOVA_p", ascending=True, inplace=True)
+
     # 可视化 1: PCA 降维后散点图
     pca = PCA(n_components=2)
     reduced_data = pca.fit_transform(data)
@@ -115,13 +116,15 @@ def apply_spectral_clustering(city_list, n_clusters):
     plt.legend(title="Variable")
     plt.show()
 
+
+
     # 可视化变量贡献度（雷达图）
     cluster_means = df.groupby("Cluster").mean(numeric_only=True)
     num_vars = len(cluster_means.columns)
     angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
 
     fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
-    ax.set_ylim(0.45, 0.65)  # 设置雷达图的值域
+    ax.set_ylim(0.45, 0.85)  # 设置雷达图的值域
     for idx, row in cluster_means.iterrows():
         ax.plot(angles + [angles[0]], row.tolist() + [row.tolist()[0]], label=f"Cluster {idx}")
     ax.set_xticks(angles)
@@ -129,20 +132,23 @@ def apply_spectral_clustering(city_list, n_clusters):
     ax.set_title("Radar Chart of Cluster Characteristics")
     ax.legend()
     plt.show()
+
     return city_list,df, feature_importance
 
 
 if __name__ == '__main__':
-    from Social_segregation.struct.data_reader import data_reader, save_results_to_csv
+    from Social_segregation.struct.data_reader import data_reader, save_results_to_csv,data_reader_census_tract
     # from visual_analysis_first_paper import plot_city_data_by_class
     from Social_segregation.visual import plot_city_data_combined, plot_city_data_by_cluster,plot_selected_cities
-    file_path = r"D:\Code\Social_segregation\data\SSI_golbal_data.csv"
-    city_list = data_reader(file_path, 3)
+
+    file_path = r'D:\data\social segregation\SSI\Data\Step2_SSI\NewYork_LocalSSI.csv'
+
+    city_list = data_reader_census_tract(file_path, 3)
 
     city_list,df_result, importance_result = apply_spectral_clustering(city_list, n_clusters=3)
     print(importance_result)
     #city_list = apply_spectral_clustering(city_list, 3)
     # #plot_city_data_combined(city_list)
     plot_city_data_by_cluster(city_list)
-    save_results_to_csv(city_list, r"D:\Code\Social_segregation\data\SSI_golbal_data_spectral_result.csv")
+    #save_results_to_csv(city_list, r"D:\Code\Social_segregation\data\SSI_golbal_data_spectral_result.csv")
     #plot_selected_cities(city_list,['Riverside','NewYork'])

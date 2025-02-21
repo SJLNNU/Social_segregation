@@ -53,7 +53,7 @@ def relative_importance_analysis_with_selected_initclass(city_list, selected_ini
                   for city in city_list if city.init_class == selected_init_class])
     y = np.array([city.themes for city in city_list if city.init_class == selected_init_class])
 
-    if X.shape[0] < 10:  # 设定一个最小样本阈值
+    if X.shape[0] < 3:  # 设定一个最小样本阈值
         print("Warning: Sample size too small for reliable importance analysis.")
         return
 

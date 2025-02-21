@@ -15,7 +15,7 @@ def apply_decision_tree_analysis(city_list, n_clusters):
     :return: 更新 city.cluster_class, 并返回数据分析结果
     '''
     data = np.array([[city.theme1, city.theme2, city.theme3, city.theme4] for city in city_list])
-    city_names = [city.name for city in city_list]
+    city_names = [city.id for city in city_list]
 
     # KMeans 聚类
     kmeans = KMeans(n_clusters=n_clusters, random_state=0, n_init='auto')
@@ -84,7 +84,7 @@ def apply_decision_tree_analysis(city_list, n_clusters):
     angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
 
     fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
-    ax.set_ylim(0.45, 0.65)  # 设置雷达图的值域
+    ax.set_ylim(0.45, 0.85)  # 设置雷达图的值域
     for idx, row in cluster_means.iterrows():
         ax.plot(angles + [angles[0]], row.tolist() + [row.tolist()[0]], label=f"Cluster {idx}")
     ax.set_xticks(angles)
@@ -94,14 +94,13 @@ def apply_decision_tree_analysis(city_list, n_clusters):
     plt.show()
     return city_list, df, feature_importance
 if __name__ == '__main__':
-    from Social_segregation.struct.data_reader import data_reader,save_results_to_csv
+    from Social_segregation.struct.data_reader import data_reader,save_results_to_csv,data_reader_census_tract
     #from visual_analysis_first_paper import plot_city_data_by_class
     from Social_segregation.visual import plot_city_data_combined,plot_city_data_by_cluster
 
-    file_path = r"D:\Code\Social_segregation\data\SSI_golbal_data.csv"
-    city_list = data_reader(file_path,3)
-    city_list,df, importance_df= apply_decision_tree_analysis(city_list, 3)
+    file_path = r'D:\data\social segregation\SSI\Data\Step2_SSI\NewYork_LocalSSI.csv'
+    city_list = data_reader_census_tract(file_path,10)
+    city_list,df, importance_df= apply_decision_tree_analysis(city_list, 10)
     plot_city_data_by_cluster(city_list)
-    save_results_to_csv(city_list, r"D:\Code\Social_segregation\data\SSI_golbal_data_kmeans_result.csv")
     print(importance_df)
 
