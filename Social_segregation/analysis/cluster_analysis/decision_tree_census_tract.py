@@ -99,8 +99,11 @@ if __name__ == '__main__':
     from Social_segregation.visual import plot_city_data_combined,plot_city_data_by_cluster
 
     file_path = r'D:\data\social segregation\SSI\Data\Step2_SSI\NewYork_LocalSSI.csv'
-    city_list = data_reader_census_tract(file_path,10)
-    city_list,df, importance_df= apply_decision_tree_analysis(city_list, 10)
+    city_list = data_reader_census_tract(file_path,3)
+    city_list,df, importance_df= apply_decision_tree_analysis(city_list, 3)
     plot_city_data_by_cluster(city_list)
     print(importance_df)
 
+# Census Tract Level
+# 30 个城市 ，可视化+莫兰指数
+#

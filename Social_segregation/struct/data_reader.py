@@ -75,7 +75,7 @@ def data_reader_census_tract(file_path, init_classes):
             #跳过第一行
             if reader.line_num == 1:
                 continue
-            cur_city = census_tract(row[0])
+            cur_city = census_tract(int(row[0]))
             cur_city.theme1 = float(row[11])
             cur_city.theme2 = float(row[12])
             cur_city.theme3 = float(row[13])
@@ -136,7 +136,7 @@ def associate_shapes(census_tract_list, shapefile_path):
     gdf = gpd.read_file(shapefile_path)
 
     # 将 shapefile 数据转换为字典（key: geoid, value: geometry）
-    shape_dict = {row['GEOID']: row['geometry'] for _, row in gdf.iterrows()}
+    shape_dict = {int(row['GEOID']): row['geometry'] for _, row in gdf.iterrows()}
 
     # 关联 shape 数据
     for tract in census_tract_list:
@@ -182,13 +182,16 @@ if __name__ == '__main__':
     # relative_importance_analysis_with_selected_initclass(city_list,0)
     # relative_importance_analysis_with_selected_initclass(city_list,1)
     # relative_importance_analysis_with_selected_initclass(city_list,2)
-    file_path=r'D:\data\social segregation\SSI\Data\Step2_SSI\NewYork_LocalSSI.csv'
-    shapefile_path=r'D:\data\social segregation\SSI\Data\Shapefiles\Shapefiles\NewYork_MSA_CT.shp'
-    census_tract_list=data_reader_census_tract(file_path, 3)
-    census_tract_list=associate_shapes(census_tract_list, shapefile_path)
-    save_census_tracts_to_geojson(census_tract_list,'newyork_census_tract.geojson')
+
+
     #relative_importance_analysis(census_tract_list)
     # relative_importance_analysis_with_selected_initclass(census_tract_list,0)
     # relative_importance_analysis_with_selected_initclass(census_tract_list,1)
     # relative_importance_analysis_with_selected_initclass(census_tract_list,2)
 
+    city_name='Minneapolis'
+    file_path=r'D:\data\social segregation\SSI\Data\Step2_SSI\{}_LocalSSI.csv'.format(city_name)
+    shapefile_path=r'D:\data\social segregation\SSI\Data\Shapefiles\Shapefiles\{}_MSA_CT.shp'.format(city_name)
+    census_tract_list=data_reader_census_tract(file_path, 3)
+    census_tract_list=associate_shapes(census_tract_list, shapefile_path)
+    save_census_tracts_to_geojson(census_tract_list,'../data/Cemsus_tract/{}_census_tract.geojson'.format(city_name))
