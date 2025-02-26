@@ -15,7 +15,7 @@ def relative_importance_analysis(city_list):
 
     model = LinearRegression()
     model.fit(X, y)
-
+    r_squared = model.score(X, y)
     importance = permutation_importance(model, X, y, scoring='r2', random_state=42,n_repeats=30)
     feature_importance = importance.importances_mean
 
@@ -38,6 +38,7 @@ def relative_importance_analysis(city_list):
     plt.title("Relative Importance Analysis (RIA)")
     plt.show()
 
+    print(f"\nR² Score: {r_squared:.4f}")
     print("Relative Importance of Each Theme (%):")
     for name, score in zip(feature_names, feature_importance_percent):
         print(f"{name}: {score:.2f}%")
@@ -59,7 +60,7 @@ def relative_importance_analysis_with_selected_initclass(city_list, selected_ini
 
     model = LinearRegression()
     model.fit(X, y)
-
+    r_squared = model.score(X, y)
     importance = permutation_importance(model, X, y, scoring='r2', random_state=42, n_repeats=30)
     feature_importance = np.maximum(importance.importances_mean, 0)  # 归零负值
 
@@ -82,6 +83,7 @@ def relative_importance_analysis_with_selected_initclass(city_list, selected_ini
     plt.title(f"Relative Importance Analysis (RIA) for Init Class {selected_init_class}")
     plt.show()
 
+    print(f"\nR² Score: {r_squared:.4f}")
     print(f"Relative Importance of Each Theme for Init Class {selected_init_class} (%):")
     for name, score in zip(feature_names, feature_importance_percent):
         print(f"{name}: {score:.2f}%")

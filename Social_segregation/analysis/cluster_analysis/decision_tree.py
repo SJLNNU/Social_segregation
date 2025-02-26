@@ -5,9 +5,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import cross_val_score
 
-
-def apply_decision_tree_analysis(city_list, n_clusters):
+def apply_decision_tree_kmeans_analysis(city_list, n_clusters):
     '''
     使用 K-Means 进行聚类，并使用决策树分析特征重要性
     :param city_list: list[City] 城市数据
@@ -17,8 +18,11 @@ def apply_decision_tree_analysis(city_list, n_clusters):
     data = np.array([[city.theme1, city.theme2, city.theme3, city.theme4] for city in city_list])
     city_names = [city.name for city in city_list]
 
+    # scaler = StandardScaler()
+    # X_scaled = scaler.fit_transform(data)
+
     # KMeans 聚类
-    kmeans = KMeans(n_clusters=n_clusters, random_state=0, n_init='auto')
+    kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
     labels = kmeans.fit_predict(data)
 
     for city, label in zip(city_list, labels):
@@ -38,7 +42,10 @@ def apply_decision_tree_analysis(city_list, n_clusters):
     X = df[["Theme 1", "Theme 2", "Theme 3", "Theme 4"]]
     y = df["Cluster"]
     clf = DecisionTreeClassifier(random_state=0, max_depth=3)  # 限制树深度以提升可解释性
+    cv_scores = cross_val_score(clf, X, y, cv=5)
+    mean_accuracy = cv_scores.mean()
     clf.fit(X, y)
+    print(f"决策树模型的平均准确率（5折交叉验证）: {mean_accuracy:.4f}")
 #决策树可视化
     plt.figure(figsize=(12, 8))
     plot_tree(clf, feature_names=X.columns, class_names=[str(i) for i in np.unique(y)], filled=True)
@@ -94,13 +101,14 @@ def apply_decision_tree_analysis(city_list, n_clusters):
     plt.show()
     return city_list, df, feature_importance
 if __name__ == '__main__':
-    from Social_segregation.struct.data_reader import data_reader,save_results_to_csv
+    from Social_segregation.data_struct.data_reader import data_reader,save_results_to_csv,save_city_location
     #from visual_analysis_first_paper import plot_city_data_by_class
     from Social_segregation.visual import plot_city_data_combined,plot_city_data_by_cluster
 
     file_path = r"D:\Code\Social_segregation\data\SSI_golbal_data.csv"
     city_list = data_reader(file_path,3)
-    city_list,df, importance_df= apply_decision_tree_analysis(city_list, 3)
+    city_list,df, importance_df= apply_decision_tree_kmeans_analysis(city_list, 2)
+    save_city_location(city_list,r"D:\Code\Social_segregation\data\SSI_golbal_data_kmeans_result.geojson")
     plot_city_data_by_cluster(city_list)
     save_results_to_csv(city_list, r"D:\Code\Social_segregation\data\SSI_golbal_data_kmeans_result.csv")
     print(importance_df)

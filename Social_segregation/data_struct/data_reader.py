@@ -1,11 +1,12 @@
 #读取SSI_golbal_data.csv文件
 import csv
-from Social_segregation.struct.data_struct import city,census_tract
+from Social_segregation.data_struct.data_struct import city,census_tract
 import matplotlib.pyplot as plt
 import numpy as np
 import geopandas as gpd
 from shapely.geometry import mapping
 import json
+from shapely.geometry import Point
 
 def data_reader(file_path,init_classes):
     '''
@@ -13,11 +14,20 @@ def data_reader(file_path,init_classes):
     :param file_path:
     :return:
     '''
+    city_location_file=r'D:\Code\Social_segregation\data\Location.json'
+    with open(city_location_file, 'r') as f:
+        city_location_data = json.load(f)
+
     city_list = []
     with open(file_path, 'r', encoding='utf-8') as f:
         reader = csv.reader(f)
         for row in reader:
+            #跳过第一行
+            if reader.line_num == 1:
+                continue
             cur_city=city(row[0])
+            cur_city.latitude=city_location_data[row[0]]['lat']
+            cur_city.longitude=city_location_data[row[0]]['lng']
             cur_city.theme1=float(row[1])
             cur_city.theme2=float(row[2])
             cur_city.theme3=float(row[3])
@@ -26,7 +36,6 @@ def data_reader(file_path,init_classes):
             city_list.append(cur_city)
         # 按 themes 进行排序
         city_list.sort(key=lambda x: x.themes)
-
         themes_list = [city.themes for city in city_list]
         q1 = np.percentile(themes_list, 25)  # 25% 分位数
         q2 = np.percentile(themes_list, 50)  # 50% 分位数（中位数）
@@ -61,6 +70,23 @@ def data_reader(file_path,init_classes):
         # plt.ylim(0.53, 0.65)
         # plt.show()
         return city_list
+
+def read_moran_results(file_path,city_list):
+    with open(file_path, 'r', encoding='utf-8') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            if reader.line_num == 1:
+                continue
+            city_name=row[0].split('_')[0]
+            for cur_city in city_list:
+                if cur_city.name == city_name:
+                    cur_city.theme1_moran = float(row[1])
+                    cur_city.theme2_moran = float(row[2])
+                    cur_city.theme3_moran = float(row[3])
+                    cur_city.theme4_moran = float(row[4])
+                    cur_city.themes_moran=float(row[5])
+    return  city_list
+
 
 def data_reader_census_tract(file_path, init_classes):
     '''
@@ -144,7 +170,6 @@ def associate_shapes(census_tract_list, shapefile_path):
             tract.shape = shape_dict[tract.id]
     return census_tract_list
 
-
 def save_census_tracts_to_geojson(census_tract_list, output_file):
     '''
     将 census_tract_list 保存为 GeoJSON 文件
@@ -174,10 +199,44 @@ def save_census_tracts_to_geojson(census_tract_list, output_file):
     gdf.to_file(output_file, driver="GeoJSON")
     print(f"✅ GeoJSON 文件已成功保存至: {output_file}")
 
+def save_city_location(city_list, output_file,init_class=None,cluster_class=None):
+    """
+    保存城市的经纬度到Geojson点坐标的形式
+    :param city_list:
+    :param output_file:
+    :param init_class:
+    :param cluster_class:
+    :return:
+    """
+    #读取城市列表，根据init_class 和cluster_class , 保存结果到Geojson
+    data = []
+    for city in city_list:
+        if (init_class is None or city.init_class == init_class) and \
+                (cluster_class is None or city.cluster_class == cluster_class):
+            data.append({
+                "name": city.name,
+                "theme1": city.theme1,
+                "theme2": city.theme2,
+                "theme3": city.theme3,
+                "theme4": city.theme4,
+                "themes": city.themes,
+                "init_class": city.init_class,
+                "cluster_class": city.cluster_class,
+                "geometry": Point(city.longitude, city.latitude)
+            })
+    gdf = gpd.GeoDataFrame(data, crs="EPSG:4326")
+
+    # 保存为GeoJSON
+    gdf.to_file(output_file, driver="GeoJSON")
+    print(f"✅ 城市位置GeoJSON文件已成功保存至: {output_file}")
+
 if __name__ == '__main__':
-    #file_path = r"../data/SSI_golbal_data.csv"
-    #city_list = data_reader(file_path,3)
-    from Social_segregation.analysis.importance_analysis.RIA_analysis import relative_importance_analysis,relative_importance_analysis_with_selected_initclass
+    file_path = r"../data/SSI_golbal_data.csv"
+    city_list = data_reader(file_path,3)
+    save_file_path=r'../data/city_location.geojson'
+
+
+    # from Social_segregation.analysis.importance_analysis.RIA_analysis import relative_importance_analysis,relative_importance_analysis_with_selected_initclass
     # relative_importance_analysis(city_list)
     # relative_importance_analysis_with_selected_initclass(city_list,0)
     # relative_importance_analysis_with_selected_initclass(city_list,1)
@@ -189,9 +248,9 @@ if __name__ == '__main__':
     # relative_importance_analysis_with_selected_initclass(census_tract_list,1)
     # relative_importance_analysis_with_selected_initclass(census_tract_list,2)
 
-    city_name='Minneapolis'
-    file_path=r'D:\data\social segregation\SSI\Data\Step2_SSI\{}_LocalSSI.csv'.format(city_name)
-    shapefile_path=r'D:\data\social segregation\SSI\Data\Shapefiles\Shapefiles\{}_MSA_CT.shp'.format(city_name)
-    census_tract_list=data_reader_census_tract(file_path, 3)
-    census_tract_list=associate_shapes(census_tract_list, shapefile_path)
-    save_census_tracts_to_geojson(census_tract_list,'../data/Cemsus_tract/{}_census_tract.geojson'.format(city_name))
+    # city_name='Minneapolis'
+    # file_path=r'D:\data\social segregation\SSI\Data\Step2_SSI\{}_LocalSSI.csv'.format(city_name)
+    # shapefile_path=r'D:\data\social segregation\SSI\Data\Shapefiles\Shapefiles\{}_MSA_CT.shp'.format(city_name)
+    # census_tract_list=data_reader_census_tract(file_path, 3)
+    # census_tract_list=associate_shapes(census_tract_list, shapefile_path)
+    # save_census_tracts_to_geojson(census_tract_list,'../data/Census_tract/{}_census_tract.geojson'.format(city_name))

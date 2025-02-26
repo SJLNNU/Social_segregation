@@ -133,13 +133,13 @@ def apply_spectral_clustering(city_list, n_clusters):
 
 
 if __name__ == '__main__':
-    from Social_segregation.struct.data_reader import data_reader, save_results_to_csv
+    from Social_segregation.data_struct.data_reader import data_reader, save_results_to_csv
     # from visual_analysis_first_paper import plot_city_data_by_class
     from Social_segregation.visual import plot_city_data_combined, plot_city_data_by_cluster,plot_selected_cities
     file_path = r"D:\Code\Social_segregation\data\SSI_golbal_data.csv"
     city_list = data_reader(file_path, 3)
 
-    city_list,df_result, importance_result = apply_spectral_clustering(city_list, n_clusters=3)
+    city_list,df_result, importance_result = apply_spectral_clustering(city_list, n_clusters=2)
     print(importance_result)
     #city_list = apply_spectral_clustering(city_list, 3)
     # #plot_city_data_combined(city_list)
