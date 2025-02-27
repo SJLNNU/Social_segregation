@@ -37,9 +37,9 @@ def evaluate_kmeans(k, X):
     return cluster_labels, score
 
 # 计算 k=3 和 k=4 的聚类结果及 Silhouette Score
-df["Cluster_k3"], silhouette_k3 = evaluate_kmeans(2, X)
-df["Cluster_k4"], silhouette_k4 = evaluate_kmeans(3, X)
+df["Cluster_k2"], silhouette_k2 = evaluate_kmeans(2, X)
+df["Cluster_k3"], silhouette_k3 = evaluate_kmeans(3, X)
 
 # 打印 Silhouette Scores
+print(f"Silhouette Score for k=2: {silhouette_k2}")
 print(f"Silhouette Score for k=3: {silhouette_k3}")
-print(f"Silhouette Score for k=4: {silhouette_k4}")

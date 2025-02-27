@@ -7,14 +7,14 @@ import seaborn as sns
 from sklearn.decomposition import PCA
 from sklearn.model_selection import cross_val_score
 
-def apply_decision_tree_kmeans_analysis(city_list, n_clusters):
+def apply_decision_tree_kmeans_analysis_moran(city_list, n_clusters):
     '''
     使用 K-Means 进行聚类，并使用决策树分析特征重要性
     :param city_list: list[City] 城市数据
     :param n_clusters: 期望的聚类数量
     :return: 更新 city.cluster_class, 并返回数据分析结果
     '''
-    data = np.array([[city.theme1, city.theme2, city.theme3, city.theme4] for city in city_list])
+    data = np.array([[city.theme1_moran, city.theme2_moran, city.theme3_moran, city.theme4_moran, city.themes_moran] for city in city_list])
     city_names = [city.name for city in city_list]
 
     # scaler = StandardScaler()
@@ -31,14 +31,16 @@ def apply_decision_tree_kmeans_analysis(city_list, n_clusters):
     df = pd.DataFrame({
         "City": city_names,
         "Cluster": labels,
-        "Theme 1": [city.theme1 for city in city_list],
-        "Theme 2": [city.theme2 for city in city_list],
-        "Theme 3": [city.theme3 for city in city_list],
-        "Theme 4": [city.theme4 for city in city_list]
+        "theme1_moran": [city.theme1_moran for city in city_list],
+        "theme2_moran": [city.theme2_moran for city in city_list],
+        "theme3_moran": [city.theme3_moran for city in city_list],
+        "theme4_moran": [city.theme4_moran for city in city_list],
+        "themes_moran": [city.themes_moran for city in city_list]
+
     })
 
     # 决策树分类器
-    X = df[["Theme 1", "Theme 2", "Theme 3", "Theme 4"]]
+    X = df[["theme1_moran", "theme2_moran", "theme3_moran", "theme4_moran",'themes_moran']]
     y = df["Cluster"]
     clf = DecisionTreeClassifier(random_state=0, max_depth=3)  # 限制树深度以提升可解释性
     cv_scores = cross_val_score(clf, X, y, cv=5)
@@ -79,7 +81,7 @@ def apply_decision_tree_kmeans_analysis(city_list, n_clusters):
     # 可视化变量分布（箱线图）
     plt.figure(figsize=(12, 6))
     sns.boxplot(x="Cluster", y="value", hue="variable",
-                data=pd.melt(df, id_vars=["City", "Cluster"], value_vars=["Theme 1", "Theme 2", "Theme 3", "Theme 4"]))
+                data=pd.melt(df, id_vars=["City", "Cluster"], value_vars=["theme1_moran", "theme2_moran", "theme3_moran", "theme4_moran",'themes_moran']))
     plt.title("Boxplot of Variables Across Clusters")
     plt.legend(title="Variable")
     plt.show()
@@ -90,9 +92,11 @@ def apply_decision_tree_kmeans_analysis(city_list, n_clusters):
     angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
 
     fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
-    ax.set_ylim(0.45, 0.65)  # 设置雷达图的值域
+    #ax.set_ylim(0.45, 0.65)  # 设置雷达图的值域
     for idx, row in cluster_means.iterrows():
-        ax.plot(angles + [angles[0]], row.tolist() + [row.tolist()[0]], label=f"Cluster {idx}")
+        values = row.tolist()
+        values += values[:1]
+        ax.plot(angles + [angles[0]], values, label=f"Cluster {idx}")
     ax.set_xticks(angles)
     ax.set_xticklabels(cluster_means.columns)
     ax.set_title("Radar Chart of Cluster Characteristics")
@@ -100,15 +104,18 @@ def apply_decision_tree_kmeans_analysis(city_list, n_clusters):
     plt.show()
     return city_list, df, feature_importance
 if __name__ == '__main__':
-    from Social_segregation.data_struct.data_reader import data_reader,save_results_to_csv,save_city_location
+    from Social_segregation.data_struct.data_reader import data_reader,save_results_to_csv,save_city_location,read_moran_results
     #from visual_analysis_first_paper import plot_city_data_by_class
     from Social_segregation.visual.visual import plot_city_data_by_cluster
 
     file_path = r"D:\Code\Social_segregation\data\SSI_golbal_data.csv"
+    moran_results_path = r'D:\Code\Social_segregation\data\morans_i_results.csv'
+
     city_list = data_reader(file_path,3)
-    city_list,df, importance_df= apply_decision_tree_kmeans_analysis(city_list, 2)
-    save_city_location(city_list,r"D:\Code\Social_segregation\data\SSI_golbal_data_kmeans_result.geojson")
+    city_list=read_moran_results(moran_results_path,city_list)
+    city_list,df, importance_df= apply_decision_tree_kmeans_analysis_moran(city_list, 2)
+    #save_city_location(city_list,r"D:\Code\Social_segregation\data\SSI_golbal_data_kmeans_result.geojson")
     plot_city_data_by_cluster(city_list)
-    save_results_to_csv(city_list, r"D:\Code\Social_segregation\data\SSI_golbal_data_kmeans_result.csv")
+    save_results_to_csv(city_list, r"D:\Code\Social_segregation\data\SSI_golbal_data_moran_kmeans_result.csv")
     print(importance_df)
 

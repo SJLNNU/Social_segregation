@@ -1,7 +1,5 @@
-from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import numpy as np
-import random
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from scipy.stats import f_oneway, kruskal
@@ -89,9 +87,9 @@ def apply_kmeans_clustering(city_list, n_clusters):
 
 
 if __name__ == '__main__':
-    from Social_segregation.struct.data_reader import data_reader,save_results_to_csv
+    from Social_segregation.struct.data_reader import data_reader
+
     #from visual_analysis_first_paper import plot_city_data_by_class
-    from Social_segregation.visual import plot_city_data_combined,plot_city_data_by_cluster
 
     file_path = r"D:\Code\Social_segregation\data\SSI_golbal_data.csv"
     city_list = data_reader(file_path,3)

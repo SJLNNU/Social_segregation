@@ -1,17 +1,11 @@
-import matplotlib.pyplot as plt
-import scipy.cluster.hierarchy as sch
-from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
-from sklearn.metrics import silhouette_score
-import pandas as pd
-import numpy as np
-from sklearn.cluster import KMeans
-from sklearn.tree import DecisionTreeClassifier,export_text,plot_tree
+from scipy.cluster.hierarchy import linkage, fcluster
+from sklearn.tree import DecisionTreeClassifier, plot_tree
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler
+
 
 # # 读取数据
 # file_path =r"D:\Code\Social_segregation\data\SSI_golbal_data.csv"  # 修改为你的文件路径
@@ -140,9 +134,9 @@ def apply_decision_tree_hierarchy(city_list,n_clusters=None):
     plt.show()
     return city_list, df, feature_importance
 if __name__ == '__main__':
-    from Social_segregation.data_struct.data_reader import data_reader,save_results_to_csv,save_city_location
+    from Social_segregation.data_struct.data_reader import data_reader
     #from visual_analysis_first_paper import plot_city_data_by_class
-    from Social_segregation.visual import plot_city_data_combined,plot_city_data_by_cluster
+    from Social_segregation.visual.visual import plot_city_data_by_cluster
 
     file_path = r"D:\Code\Social_segregation\data\SSI_golbal_data.csv"
     city_list = data_reader(file_path,3)

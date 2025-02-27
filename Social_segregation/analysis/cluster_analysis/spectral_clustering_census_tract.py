@@ -1,6 +1,5 @@
 import numpy as np
-from sklearn.cluster import KMeans, SpectralClustering
-from sklearn.tree import DecisionTreeClassifier,export_text,plot_tree
+from sklearn.tree import DecisionTreeClassifier, plot_tree
 import seaborn as sns
 from sklearn.cluster import SpectralClustering
 from scipy.stats import f_oneway, kruskal
@@ -137,9 +136,9 @@ def apply_spectral_clustering(city_list, n_clusters):
 
 
 if __name__ == '__main__':
-    from Social_segregation.struct.data_reader import data_reader, save_results_to_csv,data_reader_census_tract
+    from Social_segregation.struct.data_reader import data_reader_census_tract
     # from visual_analysis_first_paper import plot_city_data_by_class
-    from Social_segregation.visual import plot_city_data_combined, plot_city_data_by_cluster,plot_selected_cities
+    from Social_segregation.visual.visual import plot_city_data_by_cluster
 
     file_path = r'D:\data\social segregation\SSI\Data\Step2_SSI\NewYork_LocalSSI.csv'
 

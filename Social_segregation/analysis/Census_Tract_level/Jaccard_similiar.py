@@ -4,12 +4,13 @@ import pandas as pd
 from sklearn.metrics import jaccard_score
 
 # 设置文件夹路径
-themes_folder = r"D:\Code\Social_segregation\data\Getis_Ord_themes_Results"  # themes 结果文件夹
-sub_class_number=4
+main_class_number=1
+themes_folder = r"D:\Code\Social_segregation\data\Getis_Ord_theme{}_Results".format(main_class_number)  # themes 结果文件夹
+sub_class_number=2
 sub_theme1_folder = r"D:\Code\Social_segregation\data\Getis_Ord_theme{}_Results".format(sub_class_number)  # theme1-4 结果文件夹
 
 
-output_csv = r"D:\Code\Social_segregation\data\Jaccard_Similarity_themes-theme{}.csv".format(sub_class_number)  # 结果文件路径
+output_csv = r"D:\Code\Social_segregation\data\Jaccard_Similarity_theme{}-theme{}.csv".format(main_class_number,sub_class_number)  # 结果文件路径
 
 # 置信度水平
 significance_levels = ['99%', '95%', '90%']
@@ -41,14 +42,14 @@ for filename in os.listdir(themes_folder):
                     continue
 
                 # 计算 Jaccard 相似系数
-                jaccard_scores = {'City': city_name, 'Comparison': f'Themes-{sub_theme_name}'}
+                jaccard_scores = {'City': city_name, 'Comparison': f'Theme{main_class_number}-{sub_theme_name}'}
 
                 for level in significance_levels:
                     # 提取热点和冷点数据（转换为二进制）
-                    themes_hotspot = themes_gdf[f'themes_hotspot_{level}'].astype(int)
+                    themes_hotspot = themes_gdf[f'theme{main_class_number}_hotspot_{level}'].astype(int)
                     sub_hotspot = sub_gdf[f'{sub_theme_name}_hotspot_{level}'].astype(int)
 
-                    themes_coldspot = themes_gdf[f'themes_coldspot_{level}'].astype(int)
+                    themes_coldspot = themes_gdf[f'theme{main_class_number}_coldspot_{level}'].astype(int)
                     sub_coldspot = sub_gdf[f'{sub_theme_name}_coldspot_{level}'].astype(int)
 
                     # 计算 Jaccard 相似度

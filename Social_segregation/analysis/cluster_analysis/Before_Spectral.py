@@ -1,11 +1,7 @@
-from sklearn.preprocessing import StandardScaler
 from sklearn.metrics.pairwise import rbf_kernel
 from sklearn.cluster import KMeans
-from scipy.linalg import eigh
-import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.cluster import SpectralClustering
 from scipy.linalg import eigh
 
 def extract_features(city_list):
@@ -63,9 +59,9 @@ def determine_optimal_k(data, k_max=10):
 
 
 if __name__ == '__main__':
-    from Social_segregation.data_struct.data_reader import data_reader, save_results_to_csv, save_city_location
+    from Social_segregation.data_struct.data_reader import data_reader
+
     # from visual_analysis_first_paper import plot_city_data_by_class
-    from Social_segregation.visual import plot_city_data_combined, plot_city_data_by_cluster
 
     file_path = r"D:\Code\Social_segregation\data\SSI_golbal_data.csv"# 调用函数
     city_list = data_reader(file_path, 3)  # 调用分析函数
