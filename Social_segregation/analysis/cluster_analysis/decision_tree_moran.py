@@ -16,17 +16,15 @@ def apply_decision_tree_kmeans_analysis_moran(city_list, n_clusters):
     '''
     data = np.array([[city.theme1_moran, city.theme2_moran, city.theme3_moran, city.theme4_moran, city.themes_moran] for city in city_list])
     city_names = [city.name for city in city_list]
-
+    theme_names = ["SES", "HCD", "MSL", "HTT", "Overall"]
     # scaler = StandardScaler()
     # X_scaled = scaler.fit_transform(data)
 
     # KMeans 聚类
     kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
     labels = kmeans.fit_predict(data)
-
     for city, label in zip(city_list, labels):
         city.cluster_class = label
-
     # 构建 DataFrame
     df = pd.DataFrame({
         "City": city_names,
@@ -36,7 +34,6 @@ def apply_decision_tree_kmeans_analysis_moran(city_list, n_clusters):
         "theme3_moran": [city.theme3_moran for city in city_list],
         "theme4_moran": [city.theme4_moran for city in city_list],
         "themes_moran": [city.themes_moran for city in city_list]
-
     })
 
     # 决策树分类器
@@ -77,17 +74,25 @@ def apply_decision_tree_kmeans_analysis_moran(city_list, n_clusters):
     plt.title("K-Means Clustering (PCA Projection)")
     plt.legend(title="Cluster")
     plt.show()
-
+    #feature_names = ["SES", "HCD", "MSL", "HTT"]
     # 可视化变量分布（箱线图）
     plt.figure(figsize=(12, 6))
-    sns.boxplot(x="Cluster", y="value", hue="variable",
-                data=pd.melt(df, id_vars=["City", "Cluster"], value_vars=["theme1_moran", "theme2_moran", "theme3_moran", "theme4_moran",'themes_moran']))
+    melted_df = pd.melt(df, id_vars=["City", "Cluster"],
+                        value_vars=["theme1_moran", "theme2_moran", "theme3_moran", "theme4_moran", 'themes_moran'])
+    melted_df['variable'] = melted_df['variable'].map(
+        {f"theme{i + 1}_moran": name for i, name in enumerate(theme_names[:4])})
+    melted_df.loc[melted_df['variable'] == 'themes_moran', 'variable'] = theme_names[4]
+    sns.boxplot(x="Cluster", y="value", hue="variable", data=melted_df)
+    # sns.boxplot(x="Cluster", y="value", hue="variable",
+    #             data=pd.melt(df, id_vars=["City", "Cluster"],
+    #                          value_vars=["theme1_moran", "theme2_moran", "theme3_moran", "theme4_moran",'themes_moran']))
     plt.title("Boxplot of Variables Across Clusters")
     plt.legend(title="Variable")
     plt.show()
 
     # 可视化变量贡献度（雷达图）
     cluster_means = df.groupby("Cluster").mean(numeric_only=True)
+    cluster_means.columns = theme_names  # 重命名列
     num_vars = len(cluster_means.columns)
     angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
 
@@ -104,9 +109,9 @@ def apply_decision_tree_kmeans_analysis_moran(city_list, n_clusters):
     plt.show()
     return city_list, df, feature_importance
 if __name__ == '__main__':
-    from Social_segregation.data_struct.data_reader import data_reader,save_results_to_csv,save_city_location,read_moran_results
+    from data_process.data_reader import data_reader,save_results_to_csv,save_city_location,read_moran_results
     #from visual_analysis_first_paper import plot_city_data_by_class
-    from Social_segregation.visual.visual import plot_city_data_by_cluster
+    from visual.visual import plot_city_data_by_cluster
 
     file_path = r"D:\Code\Social_segregation\data\SSI_golbal_data.csv"
     moran_results_path = r'D:\Code\Social_segregation\data\morans_i_results.csv'
@@ -115,7 +120,7 @@ if __name__ == '__main__':
     city_list=read_moran_results(moran_results_path,city_list)
     city_list,df, importance_df= apply_decision_tree_kmeans_analysis_moran(city_list, 2)
     #save_city_location(city_list,r"D:\Code\Social_segregation\data\SSI_golbal_data_kmeans_result.geojson")
-    plot_city_data_by_cluster(city_list)
-    save_results_to_csv(city_list, r"D:\Code\Social_segregation\data\SSI_golbal_data_moran_kmeans_result.csv")
-    print(importance_df)
+    #plot_city_data_by_cluster(city_list)
+    #save_results_to_csv(city_list, r"D:\Code\Social_segregation\data\SSI_golbal_data_moran_kmeans_result.csv")
+    #print(importance_df)
 

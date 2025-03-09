@@ -34,7 +34,7 @@ for theme_x in themes:
 for level in confidence_levels:
     for t in types:
         plt.figure(figsize=(8, 6))
-        sns.heatmap(similarity_data[level][t].astype(float), annot=True, cmap="coolwarm", linewidths=0.5)
+        sns.heatmap(similarity_data[level][t].astype(float), annot=True, cmap="coolwarm", linewidths=0.5,vmin=0, vmax=0.3)
         plt.title(f"Jaccard Similarity ({t}) at {level} Confidence Level")
         plt.xlabel("Themes")
         plt.ylabel("Themes")

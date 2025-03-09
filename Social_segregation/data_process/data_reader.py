@@ -1,6 +1,6 @@
 #读取SSI_golbal_data.csv文件
 import csv
-from Social_segregation.data_struct.data_struct import city,census_tract
+from data_process.data_struct import  city,census_tract
 import matplotlib.pyplot as plt
 import numpy as np
 import geopandas as gpd
@@ -8,9 +8,10 @@ from shapely.geometry import mapping
 import json
 from shapely.geometry import Point
 
-def data_reader(file_path,init_classes):
+
+def data_reader(file_path,init_classes,cluster_file=None):
     '''
-    读取合并以后的CSV，返回list[data_struct]
+    读取合并以后的CSV，返回list[data_process]
     :param file_path:
     :return:
     '''
@@ -33,6 +34,9 @@ def data_reader(file_path,init_classes):
             cur_city.theme3=float(row[3])
             cur_city.theme4=float(row[4])
             cur_city.themes=float(row[5])
+
+            cur_city.cluster_class = float(row[7])
+
             city_list.append(cur_city)
         # 按 themes 进行排序
         city_list.sort(key=lambda x: x.themes)
@@ -69,6 +73,14 @@ def data_reader(file_path,init_classes):
         # plt.grid(axis='y', linestyle='--', alpha=0.7)
         # plt.ylim(0.53, 0.65)
         # plt.show()
+        if cluster_file is not None:
+            with open(cluster_file, 'r', encoding='utf-8') as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    # 跳过第一行
+                    if reader.line_num == 1:
+                        continue
+
         return city_list
 
 def read_moran_results(file_path,city_list):
@@ -90,7 +102,7 @@ def read_moran_results(file_path,city_list):
 
 def data_reader_census_tract(file_path, init_classes):
     '''
-    读取合并以后的CSV，返回list[data_struct]
+    读取合并以后的CSV，返回list[data_process]
     :param file_path:
     :return:
     '''
@@ -231,16 +243,22 @@ def save_city_location(city_list, output_file,init_class=None,cluster_class=None
     print(f"✅ 城市位置GeoJSON文件已成功保存至: {output_file}")
 
 if __name__ == '__main__':
-    file_path = r"../data/SSI_golbal_data.csv"
-    city_list = data_reader(file_path,3)
-    save_file_path=r'../data/city_location.geojson'
+    #file_path = r"../data/SSI_golbal_data.csv"
+    #city_list = data_reader(file_path,3)
+    save_file_path=r'../data/city_location_morans_cluster.geojson'
 
-
-    # from Social_segregation.analysis.importance_analysis.RIA_analysis import relative_importance_analysis,relative_importance_analysis_with_selected_initclass
+    # from analysis.importance_analysis.Importance_analysis import relative_importance_analysis,relative_importance_analysis_with_selected_initclass
     # relative_importance_analysis(city_list)
     # relative_importance_analysis_with_selected_initclass(city_list,0)
     # relative_importance_analysis_with_selected_initclass(city_list,1)
     # relative_importance_analysis_with_selected_initclass(city_list,2)
+    file_path = r"D:\Code\Social_segregation\data\SSI_golbal_data_moran_kmeans_result.csv"
+    #moran_results_path = r'D:\Code\Social_segregation\data\morans_i_results.csv'
+
+    city_list = data_reader(file_path, 3)
+    #city_list = read_moran_results(moran_results_path, city_list)
+    save_city_location(city_list, save_file_path)
+
 
 
     #relative_importance_analysis(census_tract_list)

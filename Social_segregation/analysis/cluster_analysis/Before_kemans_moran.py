@@ -46,7 +46,7 @@ def analyze_k(city_list, max_k=10):
     return k_values, sse, silhouette_scores
 
 if __name__ == '__main__':
-    from Social_segregation.data_struct.data_reader import data_reader
+    from data_process.data_reader import data_reader
 
     # from visual_analysis_first_paper import plot_city_data_by_class
 

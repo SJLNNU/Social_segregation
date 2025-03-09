@@ -2,13 +2,15 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 import pandas as pd
-
+#Paper*
 # 读取数据
 file_path = r"D:\Code\Social_segregation\data\morans_i_results.csv"  # 修改为你的文件路径
 df = pd.read_csv(file_path)
-
+#feature_names = ["SES", "HCD", "MSL", "HTT"]
 # 选择用于聚类的特征
 features = ["theme1_moran", "theme2_moran", "theme3_moran", "theme4_moran",'themes_moran']
+#features = ["SES_moran", "HCD_moran", "MSL_moran", "HTT_moran",'Themes_moran']
+
 X = df[features]
 
 # 确定最佳 K 值（Elbow Method）
