@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 import pandas as pd
-
+#Paper*
 # 读取数据
 file_path = r"D:\Code\Social_segregation\data\morans_i_results.csv"  # 修改为你的文件路径
 df = pd.read_csv(file_path)

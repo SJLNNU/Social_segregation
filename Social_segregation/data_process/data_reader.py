@@ -1,6 +1,6 @@
 #读取SSI_golbal_data.csv文件
 import csv
-from Social_segregation.data_struct.data_struct import city,census_tract
+from data_process.data_struct import  city,census_tract
 import matplotlib.pyplot as plt
 import numpy as np
 import geopandas as gpd
@@ -8,9 +8,10 @@ from shapely.geometry import mapping
 import json
 from shapely.geometry import Point
 
+
 def data_reader(file_path,init_classes):
     '''
-    读取合并以后的CSV，返回list[data_struct]
+    读取合并以后的CSV，返回list[data_process]
     :param file_path:
     :return:
     '''
@@ -90,7 +91,7 @@ def read_moran_results(file_path,city_list):
 
 def data_reader_census_tract(file_path, init_classes):
     '''
-    读取合并以后的CSV，返回list[data_struct]
+    读取合并以后的CSV，返回list[data_process]
     :param file_path:
     :return:
     '''
@@ -233,14 +234,13 @@ def save_city_location(city_list, output_file,init_class=None,cluster_class=None
 if __name__ == '__main__':
     file_path = r"../data/SSI_golbal_data.csv"
     city_list = data_reader(file_path,3)
-    save_file_path=r'../data/city_location.geojson'
+    #save_file_path=r'../data/city_location.geojson'
 
-
-    # from Social_segregation.analysis.importance_analysis.RIA_analysis import relative_importance_analysis,relative_importance_analysis_with_selected_initclass
-    # relative_importance_analysis(city_list)
-    # relative_importance_analysis_with_selected_initclass(city_list,0)
-    # relative_importance_analysis_with_selected_initclass(city_list,1)
-    # relative_importance_analysis_with_selected_initclass(city_list,2)
+    from analysis.importance_analysis.Importance_analysis import relative_importance_analysis,relative_importance_analysis_with_selected_initclass
+    #relative_importance_analysis(city_list)
+    relative_importance_analysis_with_selected_initclass(city_list,0)
+    relative_importance_analysis_with_selected_initclass(city_list,1)
+    relative_importance_analysis_with_selected_initclass(city_list,2)
 
 
     #relative_importance_analysis(census_tract_list)

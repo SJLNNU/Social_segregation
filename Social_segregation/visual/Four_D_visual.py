@@ -50,7 +50,7 @@ plt.gca().invert_yaxis()  # 使排名 1 在顶部
 plt.xticks(theme_columns, fontsize=12)  # 横轴标签
 plt.xlabel("Theme", fontsize=14)
 plt.ylabel("Rank", fontsize=14)
-plt.title("City Rank Changes Across Themes (Selected 10 Highlighted)", fontsize=16)
+plt.title("Rank Changes Across Themes (Selected 10 Highlighted)", fontsize=16)
 
 plt.tight_layout()  # 自动调整子图参数，使之填充整个图像区域
 plt.subplots_adjust(right=0.85)  # 为图例留出空间

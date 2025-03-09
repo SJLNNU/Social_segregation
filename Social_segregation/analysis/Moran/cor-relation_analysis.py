@@ -1,5 +1,6 @@
 # 我们计算出莫兰指数以后，看这个莫兰指数与原来的theme1-4，以及themes的相关性
-from Social_segregation.data_struct.data_reader import data_reader,read_moran_results
+#Paper*
+from data_process.data_reader import data_reader,read_moran_results
 import pandas as pd
 
 # 读取原始数据以及墨兰指数
@@ -46,7 +47,7 @@ def visualize_theme_and_moran(city_list, theme, init_class=None, show_plot=True)
 
     if show_plot:
         # 创建图形和坐标轴
-        fig, ax1 = plt.subplots(figsize=(15, 8))
+        fig, ax1 = plt.subplots(figsize=(20, 10))  # 增加图表大小
 
         # 绘制theme的折线（使用左侧y轴）
         color = 'tab:blue'
@@ -54,10 +55,18 @@ def visualize_theme_and_moran(city_list, theme, init_class=None, show_plot=True)
         ax1.set_ylabel(theme.capitalize(), color=color)
         ax1.plot(df['city'], df[theme_col], color=color, label=theme.capitalize(), marker='o')
         ax1.tick_params(axis='y', labelcolor=color)
+        num_cities = len(df)
+        step = max(1, num_cities // 20)  # 显示大约20个标签
+        ax1.set_xticks(range(0, num_cities, step))
+        ax1.set_xticklabels(df['city'][::step], rotation=45, ha='center')  # 垂直显示标签
 
+        # 在每个数据点处添加一个小的垂直线，以指示城市位置
+        for i in range(num_cities):
+            ax1.axvline(x=i, color='grey', linestyle=':', alpha=0.5)
         # 创建第二个y轴
         ax2 = ax1.twinx()
-
+        for i in range(num_cities):
+            ax1.axvline(x=i, color='grey', linestyle=':', alpha=0.5)
         # 绘制theme_moran的折线（使用右侧y轴）
         color = 'tab:orange'
         ax2.set_ylabel(f"{theme.capitalize()} Moran's I", color=color)
@@ -72,7 +81,7 @@ def visualize_theme_and_moran(city_list, theme, init_class=None, show_plot=True)
         plt.title(title)
 
         # 旋转x轴标签以避免重叠
-        plt.xticks(rotation=90)
+        plt.xticks(rotation=45)
 
         # 添加图例
         lines1, labels1 = ax1.get_legend_handles_labels()
@@ -99,7 +108,7 @@ def visualize_theme_and_moran(city_list, theme, init_class=None, show_plot=True)
 # city_list = read_moran_results(r"D:\Code\Social_segregation\data\morans_i_results.csv", city_list)
 
 # 可视化Themes和其Moran's I
-result=visualize_theme_and_moran(city_list, 'themes',init_class=None,)
+result=visualize_theme_and_moran(city_list, 'theme4',init_class=None,)
 print(result)
 
 

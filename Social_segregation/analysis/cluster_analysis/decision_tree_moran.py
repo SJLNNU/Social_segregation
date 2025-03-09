@@ -104,9 +104,9 @@ def apply_decision_tree_kmeans_analysis_moran(city_list, n_clusters):
     plt.show()
     return city_list, df, feature_importance
 if __name__ == '__main__':
-    from Social_segregation.data_struct.data_reader import data_reader,save_results_to_csv,save_city_location,read_moran_results
+    from data_process.data_reader import data_reader,save_results_to_csv,save_city_location,read_moran_results
     #from visual_analysis_first_paper import plot_city_data_by_class
-    from Social_segregation.visual.visual import plot_city_data_by_cluster
+    from visual.visual import plot_city_data_by_cluster
 
     file_path = r"D:\Code\Social_segregation\data\SSI_golbal_data.csv"
     moran_results_path = r'D:\Code\Social_segregation\data\morans_i_results.csv'
