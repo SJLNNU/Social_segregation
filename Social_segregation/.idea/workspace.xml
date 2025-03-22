@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53fd7cca-2da4-4160-9228-f2d9be7eb3bd" name="更改" comment="3月10日版本修改">
-      <change afterPath="$PROJECT_DIR$/analysis/Census_Tract_level/Analysis_difference_by_social_segregation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analysis/Census_Tract_level/Cencus_track_Importance_analysis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analysis/Census_Tract_level/GWR.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analysis/Census_Tract_level/GWR_together.py" afterDir="false" />
+    <list default="true" id="53fd7cca-2da4-4160-9228-f2d9be7eb3bd" name="更改" comment="3月23日版本修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/importance_analysis/Importance_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/importance_analysis/Importance_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_process/data_reader.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_process/data_reader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,6 +249,7 @@
       <workItem from="1742032484908" duration="2543000" />
       <workItem from="1742127169480" duration="7694000" />
       <workItem from="1742384781583" duration="1257000" />
+      <workItem from="1742659442191" duration="483000" />
     </task>
     <task id="LOCAL-00001" summary="3月10日版本修改">
       <option name="closed" value="true" />
@@ -264,7 +259,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741536463516</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="3月23日版本修改">
+      <option name="closed" value="true" />
+      <created>1742659477622</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1742659477622</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,7 +276,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="3月10日版本修改" />
     <MESSAGE value="2025年3月14日18:05:03" />
-    <option name="LAST_COMMIT_MESSAGE" value="2025年3月14日18:05:03" />
+    <MESSAGE value="3月23日版本修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="3月23日版本修改" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
