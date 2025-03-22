@@ -5,19 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53fd7cca-2da4-4160-9228-f2d9be7eb3bd" name="更改" comment="3月10日版本修改">
-      <change afterPath="$PROJECT_DIR$/visual/Jaccard_similarity_city_based.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/visual/Moran_scatter_visual.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/visual/Rank_visual_improved.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/visual/images_stack.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analysis/Census_Tract_level/Analysis_difference_by_social_segregation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analysis/Census_Tract_level/Cencus_track_Importance_analysis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analysis/Census_Tract_level/GWR.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analysis/Census_Tract_level/GWR_together.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/Moran/Morans.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/Moran/Morans.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/cluster_analysis/Kmeans_gpt_moran.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/cluster_analysis/Kmeans_gpt_moran.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/cluster_analysis/decision_tree_moran.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/cluster_analysis/decision_tree_moran.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analysis/importance_analysis/Importance_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/importance_analysis/Importance_analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_process/data_reader.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_process/data_reader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visual/Four_D_visual.py" beforeDir="false" afterPath="$PROJECT_DIR$/visual/Four_D_visual.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visual/Jaccard_similarity_viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/visual/Jaccard_similarity_viz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visual/Moran_visual.py" beforeDir="false" afterPath="$PROJECT_DIR$/visual/Moran_visual.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,8 +50,11 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Python.Analysis_difference_by_social_segregation.executor&quot;: &quot;Run&quot;,
     &quot;Python.Before_kemans_moran.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Cencus_track_Importance_analysis.executor&quot;: &quot;Run&quot;,
     &quot;Python.Four_D_visual.executor&quot;: &quot;Run&quot;,
+    &quot;Python.GWR.executor&quot;: &quot;Debug&quot;,
     &quot;Python.Importance_analysis.executor&quot;: &quot;Run&quot;,
     &quot;Python.Jaccard_similarity_city_based.executor&quot;: &quot;Run&quot;,
     &quot;Python.Jaccard_similarity_viz.executor&quot;: &quot;Run&quot;,
@@ -74,6 +71,7 @@
     &quot;Python.data_reader.executor&quot;: &quot;Run&quot;,
     &quot;Python.decision_tree_moran.executor&quot;: &quot;Run&quot;,
     &quot;Python.images_stack.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tample.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
@@ -87,8 +85,13 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.Moran_scatter_visual">
-    <configuration name="Jaccard_similarity_city_based" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Code\Social_segregation\analysis\Census_Tract_level" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.data_reader">
+    <configuration name="Analysis_difference_by_social_segregation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Social_segregation" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -97,12 +100,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/visual" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analysis/Census_Tract_level" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/visual/Jaccard_similarity_city_based.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/analysis/Census_Tract_level/Analysis_difference_by_social_segregation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -111,7 +114,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Jaccard_similarity_viz" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Cencus_track_Importance_analysis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Social_segregation" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -120,12 +123,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/visual" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analysis/Census_Tract_level" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/visual/Jaccard_similarity_viz.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/analysis/Census_Tract_level/Cencus_track_Importance_analysis.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -134,7 +137,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Moran_scatter_visual" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="GWR_together" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Social_segregation" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -143,12 +146,35 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/visual" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analysis" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/visual/Moran_scatter_visual.py" />
+      <option name="SCRIPT_NAME" value="D:\Code\Social_segregation\analysis\Census_Tract_level\GWR_together.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Importance_analysis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Social_segregation" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analysis/importance_analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/analysis/importance_analysis/Importance_analysis.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -180,36 +206,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="images_stack" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Social_segregation" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/visual" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/visual/images_stack.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Moran_scatter_visual" />
         <item itemvalue="Python.data_reader" />
-        <item itemvalue="Python.images_stack" />
-        <item itemvalue="Python.Jaccard_similarity_city_based" />
-        <item itemvalue="Python.Jaccard_similarity_viz" />
+        <item itemvalue="Python.Importance_analysis" />
+        <item itemvalue="Python.Analysis_difference_by_social_segregation" />
+        <item itemvalue="Python.Cencus_track_Importance_analysis" />
+        <item itemvalue="Python.GWR_together" />
       </list>
     </recent_temporary>
   </component>
@@ -247,6 +250,11 @@
       <workItem from="1741815322234" duration="4422000" />
       <workItem from="1741860766202" duration="5068000" />
       <workItem from="1741944254150" duration="2141000" />
+      <workItem from="1741947893698" duration="21587000" />
+      <workItem from="1741995180998" duration="166000" />
+      <workItem from="1742032484908" duration="2543000" />
+      <workItem from="1742127169480" duration="7694000" />
+      <workItem from="1742384781583" duration="1257000" />
     </task>
     <task id="LOCAL-00001" summary="3月10日版本修改">
       <option name="closed" value="true" />
@@ -264,14 +272,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="3月10日版本修改" />
-    <option name="LAST_COMMIT_MESSAGE" value="3月10日版本修改" />
+    <MESSAGE value="2025年3月14日18:05:03" />
+    <option name="LAST_COMMIT_MESSAGE" value="2025年3月14日18:05:03" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/analysis/importance_analysis/Importance_analysis.py</url>
-          <line>95</line>
+          <line>99</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -281,8 +290,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/data_process/data_reader.py</url>
-          <line>259</line>
+          <line>262</line>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/analysis/Census_Tract_level/Cencus_track_Importance_analysis.py</url>
+          <line>124</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -293,18 +307,22 @@
     <SUITE FILE_PATH="coverage/Social_segregation$Kmeans_gpt.coverage" NAME="Kmeans_gpt 覆盖结果" MODIFIED="1741623429509" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/analysis/cluster_analysis" />
     <SUITE FILE_PATH="coverage/Social_segregation$Before_kemans_moran.coverage" NAME="Before_kemans_moran 覆盖结果" MODIFIED="1741530309451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/analysis/cluster_analysis" />
     <SUITE FILE_PATH="coverage/Social_segregation$Pretent_mobility.coverage" NAME="Pretent_mobility 覆盖结果" MODIFIED="1741262175331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visual" />
-    <SUITE FILE_PATH="coverage/Social_segregation$Importance_analysis.coverage" NAME="Importance_analysis 覆盖结果" MODIFIED="1741606551927" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/analysis/importance_analysis" />
     <SUITE FILE_PATH="coverage/Social_segregation$data_reader__1_.coverage" NAME="data_reader (1) 覆盖结果" MODIFIED="1741722460400" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
+    <SUITE FILE_PATH="coverage/Social_segregation$Importance_analysis.coverage" NAME="Importance_analysis 覆盖结果" MODIFIED="1742139257997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/analysis/importance_analysis" />
     <SUITE FILE_PATH="coverage/Social_segregation$Jaccard_similarity_city_based.coverage" NAME="Jaccard_similarity_city_based 覆盖结果" MODIFIED="1741798908398" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visual" />
+    <SUITE FILE_PATH="coverage/Social_segregation$tample.coverage" NAME="tample 覆盖结果" MODIFIED="1741980617292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/analysis" />
     <SUITE FILE_PATH="coverage/Social_segregation$Rank_visual_improved.coverage" NAME="Rank_visual_improved 覆盖结果" MODIFIED="1741733953557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visual" />
     <SUITE FILE_PATH="coverage/Social_segregation$cor_relation_analysis.coverage" NAME="cor-relation_analysis 覆盖结果" MODIFIED="1741534451954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/analysis/Moran" />
-    <SUITE FILE_PATH="coverage/Social_segregation$data_reader.coverage" NAME="data_reader 覆盖结果" MODIFIED="1741817039685" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
+    <SUITE FILE_PATH="coverage/Social_segregation$data_reader.coverage" NAME="data_reader 覆盖结果" MODIFIED="1742139261473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
     <SUITE FILE_PATH="coverage/Social_segregation$RIA_analysis.coverage" NAME="RIA_analysis 覆盖结果" MODIFIED="1741280330978" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/analysis/importance_analysis" />
     <SUITE FILE_PATH="coverage/Social_segregation$Morans.coverage" NAME="Morans 覆盖结果" MODIFIED="1741729704835" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/analysis/Moran" />
     <SUITE FILE_PATH="coverage/Social_segregation$Four_D_visual.coverage" NAME="Four_D_visual 覆盖结果" MODIFIED="1741776691500" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visual" />
     <SUITE FILE_PATH="coverage/Social_segregation$Jaccard_similarity_viz.coverage" NAME="Jaccard_similarity_viz 覆盖结果" MODIFIED="1741798097561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visual" />
     <SUITE FILE_PATH="coverage/Social_segregation$decision_tree_moran.coverage" NAME="decision_tree_moran 覆盖结果" MODIFIED="1741625136262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/analysis/cluster_analysis" />
+    <SUITE FILE_PATH="coverage/Social_segregation$Cencus_track_Importance_analysis.coverage" NAME="Cencus_track_Importance_analysis 覆盖结果" MODIFIED="1741995276929" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/analysis/Census_Tract_level" />
     <SUITE FILE_PATH="coverage/Social_segregation$Moran_scatter_visual.coverage" NAME="Moran_scatter_visual 覆盖结果" MODIFIED="1741817973087" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visual" />
+    <SUITE FILE_PATH="coverage/Social_segregation$GWR.coverage" NAME="GWR 覆盖结果" MODIFIED="1741980084115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/analysis/Census_Tract_level" />
     <SUITE FILE_PATH="coverage/Social_segregation$images_stack.coverage" NAME="images_stack 覆盖结果" MODIFIED="1741800822491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visual" />
+    <SUITE FILE_PATH="coverage/Social_segregation$Analysis_difference_by_social_segregation.coverage" NAME="Analysis_difference_by_social_segregation 覆盖结果" MODIFIED="1742032614786" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/analysis/Census_Tract_level" />
   </component>
 </project>

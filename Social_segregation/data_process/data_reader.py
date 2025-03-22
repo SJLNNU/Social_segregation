@@ -34,8 +34,9 @@ def data_reader(file_path,init_classes,cluster_file=None):
             cur_city.theme3=float(row[3])
             cur_city.theme4=float(row[4])
             cur_city.themes=float(row[5])
+            if len(row)>6:
 
-            cur_city.cluster_class = float(row[7])
+                cur_city.cluster_class = float(row[7])
 
             city_list.append(cur_city)
         # 按 themes 进行排序
@@ -100,7 +101,7 @@ def read_moran_results(file_path,city_list):
     return  city_list
 
 
-def data_reader_census_tract(file_path, init_classes):
+def data_reader_census_tract(file_path):
     '''
     读取合并以后的CSV，返回list[data_process]
     :param file_path:
@@ -243,22 +244,22 @@ def save_city_location(city_list, output_file,init_class=None,cluster_class=None
     print(f"✅ 城市位置GeoJSON文件已成功保存至: {output_file}")
 
 if __name__ == '__main__':
-    #file_path = r"../data/SSI_golbal_data.csv"
-    #city_list = data_reader(file_path,3)
-    save_file_path=r'../data/city_location_morans_cluster.geojson'
+    file_path = r"../data/SSI_golbal_data.csv"
+    city_list = data_reader(file_path,3)
+    #save_file_path=r'../data/city_location_morans_cluster.geojson'
 
-    # from analysis.importance_analysis.Importance_analysis import relative_importance_analysis,relative_importance_analysis_with_selected_initclass
-    # relative_importance_analysis(city_list)
-    # relative_importance_analysis_with_selected_initclass(city_list,0)
-    # relative_importance_analysis_with_selected_initclass(city_list,1)
-    # relative_importance_analysis_with_selected_initclass(city_list,2)
-    file_path = r"D:\Code\Social_segregation\data\SSI_golbal_data_moran_kmeans_result.csv"
-    #moran_results_path = r'D:\Code\Social_segregation\data\morans_i_results.csv'
-
-    city_list = data_reader(file_path, 3)
-    #city_list = read_moran_results(moran_results_path, city_list)
-    save_city_location(city_list, save_file_path)
-
+    from analysis.importance_analysis.Importance_analysis import relative_importance_analysis,relative_importance_analysis_with_selected_initclass
+    relative_importance_analysis(city_list)
+    relative_importance_analysis_with_selected_initclass(city_list,0)
+    relative_importance_analysis_with_selected_initclass(city_list,1)
+    relative_importance_analysis_with_selected_initclass(city_list,2)
+    # file_path = r"D:\Code\Social_segregation\data\SSI_golbal_data_moran_kmeans_result.csv"
+    # #moran_results_path = r'D:\Code\Social_segregation\data\morans_i_results.csv'
+    #
+    # city_list = data_reader(file_path, 3)
+    # #city_list = read_moran_results(moran_results_path, city_list)
+    # save_city_location(city_list, save_file_path)
+    #
 
 
     #relative_importance_analysis(census_tract_list)

@@ -42,26 +42,29 @@ def relative_importance_analysis(city_list):
     '''
     X = np.array([[city.theme1, city.theme2, city.theme3, city.theme4] for city in city_list])
     y = np.array([city.themes for city in city_list])
-
     model = LinearRegression()
     model.fit(X, y)
-
     r_squared = model.score(X, y)
-
     #feature_names = ["Theme1", "Theme2", "Theme3", "Theme4"]
     feature_names = ["SES", "HCD", "MSL", "HTT"]
-
     print(f"\nR² Score: {r_squared:.4f}")
-
+    if r_squared<0.5:
+        return None
         # 计算标准化回归系数
     std_X = np.std(X, axis=0)  # 计算每个主题的标准差
     std_y = np.std(y)  # 计算Themes的标准差
     standardized_coefficients = model.coef_ * (std_X / std_y)
-
     print("\nStandardized Coefficients (Beta Coefficients):")
+    importance_dict = {}
     for name, coef in zip(feature_names, standardized_coefficients):
         print(f"{name}: {coef:.4f}")
-    plot_standardized_coefficients(feature_names, standardized_coefficients)
+        importance_dict[name] = coef  # 将计算结果存入字典
+
+
+    # for name, coef in zip(feature_names, standardized_coefficients):
+    #     print(f"{name}: {coef:.4f}")
+    #plot_standardized_coefficients(feature_names, standardized_coefficients)
+    return importance_dict
 
 def relative_importance_analysis_with_selected_initclass(city_list, selected_init_class):
     '''
@@ -87,14 +90,26 @@ def relative_importance_analysis_with_selected_initclass(city_list, selected_ini
     feature_names = ["SES", "HCD", "MSL", "HTT"]
 
     print(f"\nR² Score: {r_squared:.4f}")
-
+    if r_squared<0.5:
+        return None
     # 计算标准化回归系数
     std_X = np.std(X, axis=0)  # 计算每个主题的标准差
     std_y = np.std(y)  # 计算Themes的标准差
+    print(model.coef_)
     standardized_coefficients = model.coef_ * (std_X / std_y)
 
+    # print("\nStandardized Coefficients (Beta Coefficients):")
+    # for name, coef in zip(feature_names, standardized_coefficients):
+    #     print(f"{name}: {coef:.4f}")
+    # #plot_standardized_coefficients(feature_names, standardized_coefficients)
+
     print("\nStandardized Coefficients (Beta Coefficients):")
+    importance_dict = {}
     for name, coef in zip(feature_names, standardized_coefficients):
         print(f"{name}: {coef:.4f}")
-    plot_standardized_coefficients(feature_names, standardized_coefficients)
+        importance_dict[name] = coef  # 将计算结果存入字典
 
+    # for name, coef in zip(feature_names, standardized_coefficients):
+    #     print(f"{name}: {coef:.4f}")
+    # plot_standardized_coefficients(feature_names, standardized_coefficients)
+    return importance_dict
