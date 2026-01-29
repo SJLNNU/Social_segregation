@@ -8,20 +8,26 @@ from collections import defaultdict
 from sklearn.metrics import jaccard_score
 
 
-def create_similarity_heatmap(similarity_matrix, themes, city_name, output_folder):
+def create_similarity_heatmap(similarity_matrix, themes, city_name, output_folder, show_city_name=True, 
+                            annotation_color='auto', city_name_color='black'):
     """Create and save similarity heatmap"""
     font_size = 20
     plt.figure(figsize=(10, 6))  # Increased figure width to accommodate city name
-    plt.rcParams['font.family'] = 'Times New Roman'
+    plt.rcParams['font.family'] = 'Calibri'
     plt.rcParams['font.size'] = font_size
 
     # 只保留城市名（去掉前缀）
     # 支持多种前缀格式，取最后一个下划线后的内容
     city_short = re.split(r'_|-', city_name)[-1]
 
-    # Create mask for upper triangle
+    # Create mask for upper triangle AND diagonal (to hide self-similarity)
     mask = np.zeros_like(similarity_matrix, dtype=bool)
-    mask[np.triu_indices_from(mask, k=1)] = True  # k=1 to exclude diagonal
+    mask[np.triu_indices_from(mask, k=0)] = True  # k=0 to include diagonal
+
+    # 准备标注颜色设置
+    annot_kws = {'size': font_size, 'weight': 'bold'}
+    if annotation_color != 'auto':
+        annot_kws['color'] = annotation_color
 
     # Create heatmap using coolwarm colormap
     heatmap = sns.heatmap(similarity_matrix,
@@ -33,7 +39,7 @@ def create_similarity_heatmap(similarity_matrix, themes, city_name, output_folde
                          center=0.5,
                          square=True,
                          fmt='.2f',
-                         annot_kws={'size': font_size, 'weight': 'bold'},
+                         annot_kws=annot_kws,
                          xticklabels=themes,
                          yticklabels=themes,
                          linewidths=0.5,
@@ -45,14 +51,16 @@ def create_similarity_heatmap(similarity_matrix, themes, city_name, output_folde
         spine.set_linewidth(2)
         spine.set_color('black')
     
-    # 在热力图右上角空白区域添加城市名
-    plt.text(0.6, 0.85, city_short, 
-             transform=plt.gca().transAxes,
-             rotation=0,
-             fontsize=font_size+4,
-             fontweight='bold',
-             verticalalignment='center',
-             horizontalalignment='center')
+    # 在热力图右上角空白区域添加城市名（可选）
+    if show_city_name:
+        plt.text(0.6, 0.85, city_short, 
+                 transform=plt.gca().transAxes,
+                 rotation=0,
+                 fontsize=font_size+4,
+                 fontweight='bold',
+                 color=city_name_color,
+                 verticalalignment='center',
+                 horizontalalignment='center')
     
     # Create output folder if it doesn't exist
     if not os.path.exists(output_folder):
@@ -65,14 +73,15 @@ def create_similarity_heatmap(similarity_matrix, themes, city_name, output_folde
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.close()
 
-def process_city_shapefiles(folder_path, output_folder):
+def process_city_shapefiles(folder_path, output_folder, show_city_names=True, 
+                          annotation_color='auto', city_name_color='black'):
     city_files = defaultdict(list)
     pattern = re.compile(r"^(.*?)_census_tract_theme([1-4])_OHSA_result\.shp$")
     theme_names = {
         '1': 'SES',
         '2': 'HCD',
         '3': 'MSL',
-        '4': 'H&T'
+        '4': 'HT'
     }
     for f in os.listdir(folder_path):
         if f.endswith('_OHSA_result.shp'):
@@ -111,10 +120,17 @@ def process_city_shapefiles(folder_path, output_folder):
         for i in range(n_themes):
             for j in range(n_themes):
                 similarity_matrix[i, j] = jaccard_score(binary_matrix[i], binary_matrix[j])
-        create_similarity_heatmap(similarity_matrix, themes, city_display, output_folder)
+        create_similarity_heatmap(similarity_matrix, themes, city_display, output_folder, 
+                                show_city_names, annotation_color, city_name_color)
         print(f"{city_display} 处理完成")
 
 # Usage
 input_folder = r"D:\Code\Social_segregation\data\Census_tract_shp_EPSG5070_OHSA_tertile_filter_result"
-output_folder = r"D:\Code\Social_segregation\data\Jaccard_similarity_OHSA"
-process_city_shapefiles(input_folder, output_folder)
+output_folder = r"D:\Code\Social_segregation\data\Jaccard_similarity_OHSA_without_city_name"
+
+# 配置参数
+show_city_names = False  # 设置为False可以隐藏城市名
+annotation_color = 'white'  # 热力图数值标注颜色：'auto'为自动，或指定颜色如'white', 'black', 'red'等
+city_name_color = 'black'  # 城市名颜色
+
+process_city_shapefiles(input_folder, output_folder, show_city_names, annotation_color, city_name_color)

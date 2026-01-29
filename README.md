@@ -9,47 +9,50 @@ This project provides a comprehensive framework for analyzing socio-spatial segr
 ## Project Structure
 
 ```
-Social_segregation/
-├── analysis/              # Analysis modules
-│   ├── Moran/            # Moran's I spatial autocorrelation analysis
-│   ├── Getis-Ord/        # Getis-Ord hotspot analysis (OHSA)
-│   ├── cluster_analysis/  # Clustering methods (K-means, Spectral, Decision Tree)
-│   ├── Correlation_analysis/  # Spearman correlation analysis
-│   ├── importance_analysis/  # Feature importance analysis
-│   └── Census_Tract_level/   # Census tract level analysis (GWR, Hot/Cold spots)
-├── data_process/         # Data processing utilities
-│   ├── data_reader.py    # Data reading functions
-│   └── data_struct.py    # Data structure definitions
-└── visual/              # Visualization scripts
-    ├── MSA_SSI_violin.py      # Violin plots for SSI distribution
-    ├── Moran_scatter_visual.py # Moran scatter plots
-    ├── Jaccard_similarity_viz.py # Jaccard similarity visualization
-    └── Four_D_visual.py        # Multi-dimensional visualization
+Social_segregation_upload/
+├── analysis/                      # Analysis modules
+│   ├── Moran/                     # Spatial autocorrelation (Fig. 7)
+│   │   └── Morans.py              # Moran's I
+│   ├── Getis-Ord/                 # OHSA and overlap (Fig. 4. Extremely segregated tracts)
+│   │   ├── OHSA_Filter_result.py  # OHSA tertile filter results
+│   │   ├── Over_lap_OHSA_result.py # Overlap summary across themes
+│   │   └── overlap_viz.py         # Overlap visualization
+│   ├── Correlation_analysis/      # Statistical correlation (Fig. 5, 6)
+│   │   ├── spearman_overall_heatmap.py       # 30 MSAs correlation (Fig. 5)
+│   │   └── spearman_correlation_analysis_rolling.py  # Sliding-window (Fig. 6)
+│   └── Census_Tract_level/        # Tract-level extreme cases
+│       └── Find_mult_hotspot.py   # Common hotspots across dimensions
+├── data_process/                  # Data processing
+│   ├── Data_converter.py
+│   ├── data_reader.py
+│   └── data_struct.py
+└── visual/                        # Visualization scripts
+    ├── MSA_SSI_violin.py          # Violin plots (Fig. 3)
+    ├── Four_D_visual.py           # MSAs segregation rankings (Fig. 4)
+    ├── Moran_scatter_visual.py    # Moran scatter (Fig. 7)
+    ├── Jaccard_similarity_OHSA.py # OHSA Jaccard similarity
+    └── Jaccard_similarity_viz.py  # Jaccard similarity visualization
 ```
 
 ## Main Features
 
-### 1. Spatial Analysis
-- **Moran's I**: Spatial autocorrelation analysis for segregation patterns
-- **Getis-Ord (OHSA)**: Optimized hotspot analysis to identify spatial clusters
-- **Geographically Weighted Regression (GWR)**: Local regression analysis
+### 1.Visualization
+- **Violin plots**: visual/MSA_SSI_violin.py (Figure 3)
+- **MSAs Segregation rankings**: visual/Four_D_visual.py （Figure 4）
 
-### 2. Clustering Analysis
-- K-means clustering
-- Spectral clustering
-- Hierarchical clustering
-- Decision tree-based classification
+### 2.Statistical Correlation Analysis
+- **Correlation analysis for 30 MSAs**:analysis/Correlation_analysis/spearman_overall_heatmap.py(Figure 5)
+- **Shapiro-Wilk test**: Software:GraphPad Prism 10.1.2
+- **Sliding-window correlation analysis**: analysis/Correlation_analysis/spearman_correlation_analysis_rolling.py(Figure 6)
 
-### 3. Statistical Analysis
-- Spearman correlation analysis
-- Feature importance analysis (SHAP, relative importance)
-- Hot/Cold spot identification
+### 3.Spatial Autocorrelation Analysis
+- **Moran's I**:analysis/Moran/Morans.py
+- **Moran's I Visualization**:visual/Moran_scatter_visual.py(Figure 7)
 
-### 4. Visualization
-- Violin plots for SSI distribution across themes
-- Moran scatter plots
-- Jaccard similarity heatmaps
-- Multi-dimensional visualizations
+### 4. Extremely segregated census tracts detection
+- **Optimised Hot Spot Analysis (OHSA)**: Software:ArcGIS Pro and analysis/Getis-Ord/OHSA_Filter_result.py
+- **OHSA Jaccard similarity analysis**:visual/Jaccard_similarity_OHSA.py
+- **Extreme cases**:analysis/Census_Tract_level/Find_mult_hotspot.py
 
 ## Data Description
 
@@ -82,50 +85,7 @@ Data covers 30 U.S. metropolitan areas at the census tract level.
 pip install pandas numpy geopandas matplotlib seaborn scikit-learn libpysal esda mgwr shap
 ```
 
-## Usage
-
-### Basic Data Reading
-
-```python
-from data_process.data_reader import data_reader
-
-# Read global SSI data
-city_list = data_reader(
-    file_path='data/SSI_golbal_data.csv',
-    init_classes=4,
-    classification_strategy='quartiles'
-)
-```
-
-### Spatial Analysis Example
-
-```python
-# Moran's I analysis
-from analysis.Moran.Morans import Moran
-
-# Getis-Ord hotspot analysis
-from analysis.Getis-Ord.Getis-Ord import getis_ord_analysis
-```
-
-### Visualization Example
-
-```python
-from visual.MSA_SSI_violin import plot_raincloud_like, load_and_prepare_long
-
-# Load and visualize SSI distribution
-theme_map = {
-    "Theme1": "SES",
-    "Theme2": "HCD",
-    "Theme3": "MSL",
-    "Theme4": "HT",
-    "Themes": "Comp."
-}
-
-long_df = load_and_prepare_long('data/SSI_golbal_data.csv', theme_map)
-plot_raincloud_like(long_df, theme_order=["SES", "HCD", "MSL", "HT", "Comp."])
-```
-
-## Citation
+# Citation
 
 If you use this code in your research, please cite:
 
