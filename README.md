@@ -25,7 +25,9 @@ Social_segregation_upload/
 ├── data_process/                  # Data processing
 │   ├── Data_converter.py
 │   ├── data_reader.py
-│   └── data_struct.py
+│   ├── data_struct.py
+│   └── SSI_Calculation.R          # SSI calculation (R)
+
 └── visual/                        # Visualization scripts
     ├── MSA_SSI_violin.py          # Violin plots (Fig. 3)
     ├── Four_D_visual.py           # MSAs segregation rankings (Fig. 4)
