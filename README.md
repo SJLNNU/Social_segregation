@@ -41,6 +41,7 @@ Social_segregation_upload/
 - **MSAs Segregation rankings**: visual/Four_D_visual.py （Figure 4）
 
 ### 2.Statistical Correlation Analysis
+- **SSI Computation**: data_process/SSI_Calculation.R
 - **Correlation analysis for 30 MSAs**:analysis/Correlation_analysis/spearman_overall_heatmap.py(Figure 5)
 - **Shapiro-Wilk test**: Software:GraphPad Prism 10.1.2
 - **Sliding-window correlation analysis**: analysis/Correlation_analysis/spearman_correlation_analysis_rolling.py(Figure 6)
