@@ -93,5 +93,5 @@ pip install pandas numpy geopandas matplotlib seaborn scikit-learn libpysal esda
 If you use this code in your research, please cite:
 
 ```
-"A Mobility-Based Framework for Measuring Socio-Spatial Segregation in 30 U.S. Metropolitan Areas."
+"A Mobility-Based Framework for Measuring Socio-Spatial Segregation in 30 U.S. Metropolitan Areas.Computers, Environment and Urban Systems,Volume 128,2026,"
 ```
